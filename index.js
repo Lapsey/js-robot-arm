@@ -11,15 +11,16 @@ board.on('ready', () => {
     const ylAxis = new Servo(ylPin);
     const yuAxis = new Servo(yuPin);
     const gripper = new Servo(gPin); 
+
+    const writeServos = () => {
+        xAxis.to(output.x);
+        ylAxis.to(output.yl);
+        yuAxis.to(output.yu);
+        gripper.write(180 ? (output.gripper == true) : 0);
+    }
+    
+    setInterval(() => {
+        writeServos();
+    }, 10);
 });
 
-const writeServos = () => {
-    xAxis.to(output.x);
-    ylAxis.to(output.yl);
-    yuAxis.to(output.yu);
-    gripper.write(180 ? (output.gripper == true) : 0);
-}
-
-setInterval(() => {
-    writeServos();
-}, 10);
